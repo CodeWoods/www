@@ -1,0 +1,60 @@
+---
+import { formatDistance, differenceInDays, format } from 'date-fns';
+import { readAll } from '../lib/markdoc/read';
+import { blog } from '../lib/markdoc/frontmatter.schema';
+import PageLayout from '../layouts/PageLayout.astro';
+import PageMeta from '../components/PageMeta.astro';
+import Label from '../components/Label.astro';
+import { SITE_TITLE } from '../config';
+
+const posts = await readAll({
+  directory: 'blog',
+  frontmatterSchema: blog,
+});
+
+const sortedPosts = posts
+  .filter((p) => (import.meta.env.MODE !== 'production' ? true : p.frontmatter.draft !== true))
+  .sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+---
+
+<PageLayout>
+  <PageMeta title={`Blog | ${SITE_TITLE}`} slot="meta" />
+  <section slot="main" class="pt-4">
+    <ul>
+      {
+        sortedPosts.map((post) => {
+          return (
+            <li class="mb-3 grid grid-cols-[1fr] items-start md:grid-cols-[1fr_auto] md:gap-2">
+              <div class="title">
+                {post.frontmatter.external ? (
+                  <a href={post.frontmatter.url} target="_blank" class="unset hover:text-text-link">
+                    <span>{post.frontmatter.title}</span>
+                    <span>
+                      <i class="fa-solid fa-up-right-from-square ml-1 mr-1 pb-2 text-[12px]" />
+                    </span>
+                    {post.frontmatter.label ? (
+                      <Label label={post.frontmatter.label}>{post.frontmatter.label}</Label>
+                    ) : null}
+                  </a>
+                ) : (
+                  <a href={`/${post.slug}`} class="unset hover:text-text-link">
+                    {post.frontmatter.title}
+                  </a>
+                )}
+              </div>
+              <div class="pt-1 text-sm italic text-text-muted">
+                <time datetime={post.frontmatter.date.toISOString()}>
+                  {differenceInDays(new Date(), new Date(post.frontmatter.date)) > 179
+                    ? `${formatDistance(new Date(post.frontmatter.date), new Date(), {
+                        addSuffix: true,
+                      })}`
+                    : format(new Date(post.frontmatter.date), 'MMM dd, yyyy')}
+                </time>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+</PageLayout>

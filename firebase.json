@@ -1,0 +1,135 @@
+{
+  "emulators": {
+    "hosting": {
+      "public": "build",
+      "port": 9000,
+      "host": "0.0.0.0"
+    },
+    "ui": {
+      "enabled": true
+    }
+  },
+  "hosting": {
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "s-maxage=86400, max-age=0, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|avif|webp)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=2678400, immutable"
+          },
+          {
+            "key": "CDN-Cache-Control",
+            "value": "public, max-age=2678400, immutable"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Download-Options",
+            "value": "noopen"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Frame-Options",
+            "value": "SAMEORIGIN"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Permitted-Cross-Domain-Policies",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-XSS-Protection",
+            "value": "1; mode=block"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Accept-CH",
+            "value": "DPR, Viewport-Width, Width"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Permissions-Policy",
+            "value": "accelerometer=(), camera=(), fullscreen=(self), geolocation=(self), interest-cohort=(), magnetometer=(), microphone=(), payment=(), publickey-credentials-get=(), speaker=(), screen-wake-lock=(), sync-xhr=(self), usb=(), web-share=(), xr-spatial-tracking=(), browsing-topics=(), join-ad-interest-group=(), run-ad-auction=()"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Referrer-Policy",
+            "value": "no-referrer-when-downgrade"
+          }
+        ]
+      }
+    ],
+    "cleanUrls": true
+  }
+}

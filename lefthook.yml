@@ -1,0 +1,36 @@
+# https://github.com/evilmartians/lefthook
+lint:
+  parallel: true
+  commands:
+    pkg:audit:
+      run: npm audit
+    #actions:
+      #glob: '.github/workflows/*.{yaml,yml}'
+      #run: npx actionlint {all_files}
+    secrets:
+      glob: '*'
+      run: npx secretlint {all_files}
+    js:
+      glob: '{src,plugins}/*.{js,ts,astro}'
+      run: npx eslint --ignore-path .gitignore {all_files}
+
+test:
+  parallel: true
+  commands:
+    test:unit:
+      glob: '*.{spec,test}.{[tj]s,[tj]sx}'
+      run: >
+        npx eslint {all_files} &&
+        npx vitest {all_files} --run
+
+pre-commit:
+  parallel: true
+  commands:
+    secrets:
+      glob: '*'
+      run: npx secretlint {staged_files}
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx --no-install commitlint --edit $1
