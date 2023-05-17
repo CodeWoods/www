@@ -1,0 +1,244 @@
+/**
+ * MIT License
+ * Rosé Pine Theme
+ * https://github.com/rose-pine
+ * Ported for PrismJS by fvrests [@fvrests]
+ */
+
+/* Code title styles */
+.remark-code-container {
+  position: relative;
+  padding-top: 0.7rem;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0 -5px 12px -5px #333;
+}
+
+.remark-code-container:not([data-title])::before {
+  content: attr(data-language);
+  position: absolute;
+  top: -0.25rem;
+  left: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-family-caption);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  color: #5d6067;
+  background-color: #fff689;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.remark-code-container::after {
+  content: attr(data-title);
+  position: absolute;
+  top: -0.25rem;
+  left: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-family-caption);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  color: #5d6067;
+  background-color: #fff689;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+/* Code block styles */
+.code-highlight {
+  float: left;
+  min-width: 100%;
+}
+
+.code-line {
+  display: block;
+  margin-right: -1rem;
+  margin-left: -1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  border-color: transparent;
+  border-left-width: 4px;
+}
+
+.line-number::before {
+  content: attr(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 0.5rem;
+  margin-left: -0.5rem;
+  color: #a2a5ab;
+  text-align: right;
+}
+
+/* Token styles */
+code[class*='language-'],
+pre[class*='language-'] {
+  font-family: 'LXGW WenKai Mono', ui-monospace, monospace;
+  line-height: 1.5;
+
+  /* hyphens: none; */
+  color: #575279;
+  text-align: left;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+
+  /* tab-size: 2; */
+  white-space: pre;
+  background: #fff;
+}
+
+@media print {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    text-shadow: none;
+  }
+}
+
+/* Selection */
+code[class*='language-']::selection,
+pre[class*='language-']::selection,
+code[class*='language-'] ::selection,
+pre[class*='language-'] ::selection {
+  background: #fbffc6;
+}
+
+/* Code (block & inline) */
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  color: #575279;
+  background: #fff;
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  overflow: auto;
+  margin: 0.5em 0;
+  padding: 1em;
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  color: #575279;
+  white-space: normal;
+  background: #fff;
+  border-radius: 0.3em;
+}
+
+/* Text style & opacity */
+.token.entity {
+  cursor: help;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic,
+.token.inserted,
+.token.deleted,
+.token.url {
+  font-style: italic;
+}
+
+.token.url {
+  text-decoration: underline;
+}
+
+.namespace {
+  opacity: 0.7;
+}
+
+/* Syntax highlighting */
+.token.constant {
+  color: #575279;
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata,
+.token.punctuation {
+  color: #797593;
+}
+
+.token.delimiter,
+.token.important,
+.token.atrule,
+.token.operator,
+.token.keyword {
+  color: #286983;
+}
+
+.token.tag,
+.token.tag .punctuation,
+.token.doctype,
+.token.variable,
+.token.regex,
+.token.class-name,
+.token.selector,
+.token.inserted {
+  color: #56949f;
+}
+
+.token.boolean,
+.token.entity,
+.token.number,
+.token.symbol,
+.token.function {
+  color: #d7827e;
+}
+
+.token.string,
+.token.char,
+.token.property,
+.token.attr-value,
+.token.attr-value .punctuation {
+  color: #ea9d34;
+}
+
+.token.parameter,
+.token.url,
+.token.name,
+.token.attr-name,
+.token.builtin {
+  color: #907aa9;
+}
+
+/* Insertions & deletions */
+.token.inserted {
+  background: rgba(86 148 159 12%);
+}
+
+.token.deleted {
+  color: #b4637a;
+  background: rgba(180 99 122 12%);
+}
+
+/* Line highlighting */
+pre[data-line] {
+  position: relative;
+}
+
+pre[class*='language-'] > code[class*='language-'] {
+  position: relative;
+  z-index: 1;
+}
+
+.line-highlight,
+.highlight-lines .highlighted {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  left: 0;
+  margin-top: 1em;
+  padding: inherit 0;
+  line-height: inherit;
+  white-space: pre;
+  background: #fbffc6;
+  box-shadow: inset 5px 0 0 #575279;
+}

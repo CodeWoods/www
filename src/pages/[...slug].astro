@@ -1,52 +1,28 @@
 ---
-import { readOne, readAll } from '../lib/markdoc/read';
-import { blog } from '../lib/markdoc/frontmatter.schema';
-import Renderer from '../components/Renderer.astro';
-import BlogPostMeta from '../components/BlogPostMeta.astro';
-import ContentLayout from '../layouts/ContentLayout.astro';
-import { SITE_TITLE, SITE_URL } from '../config';
+// import { components } from '~/components/mdx/index.js'
+import { CollectionEntry, getCollection } from 'astro:content'
+import PostLayout from '~/layouts/PostLayout.astro'
 
+// 改用Astro.fetchContent？
+// https://www.seanmcp.com/articles/using-dynamic-routes-to-organize-blog-posts-in-astro/
+export const prerender = true
 export async function getStaticPaths() {
-  const posts = await readAll({
-    directory: 'blog',
-    frontmatterSchema: blog,
-  });
-
-  const filteredPosts = posts
-    .filter((p) => (import.meta.env.MODE !== 'production' ? true : p.frontmatter.draft !== true))
-    // we don't want to generate pages for posts that link to external websites
-    .filter(({ frontmatter }) => !frontmatter.external);
-
-  return filteredPosts.map((post) => {
-    return { params: { slug: post.slug } };
-  });
+  const blogEntries = await getCollection('pages').then((res) =>
+    res.filter((x) => (import.meta.env.MODE !== 'production' ? true : x.data.isDraft !== true))
+  )
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: entry
+  }))
 }
 
-const { slug } = Astro.params;
-if (typeof slug !== 'string') {
-  throw Error(`slug should be string. Received: ${slug}`);
+export interface Props {
+  entry: CollectionEntry<'pages'>
 }
-
-const { content, frontmatter } = await readOne({
-  directory: 'blog',
-  slug,
-  frontmatterSchema: blog,
-});
-
-const ogImageAbsoluteUrl =
-  frontmatter.external === false && frontmatter.ogImagePath ? new URL(frontmatter.ogImagePath, SITE_URL) : undefined;
+const entry = Astro.props as Props
+const { Content } = await entry.render()
 ---
 
-<ContentLayout title={frontmatter.title} date={frontmatter.date}>
-  <BlogPostMeta
-    title={`${frontmatter.title} | ${SITE_TITLE}`}
-    description={frontmatter.external ? undefined : frontmatter.description}
-    publishDate={frontmatter.date.toISOString()}
-    ogImageAbsoluteUrl={ogImageAbsoluteUrl}
-    pathUrl={`/${slug}`}
-    ogImageWidth={1200}
-    ogImageHeight={630}
-    slot="meta"
-  />
-  <Renderer content={content} slot="content" />
-</ContentLayout>
+<PostLayout {...entry.data}>
+  <Content />
+</PostLayout>

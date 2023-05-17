@@ -1,0 +1,19 @@
+---
+import { parseYear } from '~/utils/getFormattedDate'
+import { DOMAIN } from './../../config'
+---
+
+<footer class='site-footer' data-pagefind-ignore role='contentinfo' aria-label='Footer'>
+  <!-- TODO: smooth scrolling -->
+  <small><a class='to-top' href='#main'>↑ Back to Top</a></small>
+  <section>
+    <small>
+      <span xmlns:cc='http://creativecommons.org/ns#' xmlns:dct='http://purl.org/dc/terms/'
+        ><span property='dct:title'>{DOMAIN}</span> &copy;&nbsp;{parseYear}
+        is licensed under <a href='/colophon' rel='license noopener noreferrer nofollow' style='display:inline-block;'
+          >CC BY-NC 4.0</a
+        > unless stated otherwise.</span
+      >
+    </small>
+  </section>
+</footer>

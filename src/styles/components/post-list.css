@@ -1,0 +1,41 @@
+/* @credit:
+https://github.com/flexdinesh/blogster
+*/
+
+/* FIXME：
+ * 長標題換行後間距
+ * 時間比標題還凸出
+ */
+.post-list {
+  padding-inline-start: 18px;
+}
+
+.post-list__item {
+  display: grid;
+
+  /* grid-template-columns: 1fr; */
+  margin-bottom: 0.75rem;
+  margin-left: -40px;
+
+  @media (width >= 768px) {
+    /* grid-template-columns: 1fr auto; */
+    gap: 0.5rem;
+  }
+}
+
+.post-list__timestamp {
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+
+  @media (width >= 768px) {
+    margin-top: -0.8rem;
+  }
+}
+
+.post-list__link {
+  text-indent: 1rem;
+}
+
+.post-link__title {
+  line-height: 1.2;
+}

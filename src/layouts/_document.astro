@@ -1,0 +1,53 @@
+---
+// TODO: 測試結構化資料標記
+// https://developers.google.com/search/docs/appearance/structured-data
+import type { HTMLAttributes } from 'astro/types'
+import { DOMAIN, LANG } from '../config'
+import Fonts from './Fonts.astro'
+// TODO: https://vitejs.dev/guide/features.html#disabling-css-injection-into-the-page
+import './../styles/global.css'
+
+export interface Props {
+  title?: string
+  description?: string
+  colorLight?: string
+  body?: HTMLAttributes<'body'>
+}
+
+// TODO: let sanitizedTitle = sanitizeHtml(Astro.props.title)
+// https://github.com/johneatmon/eatmon.co/blob/main/src/components/BaseHead.astro
+const { title, description = 'Hi there!', colorLight = '#FFE4E1' } = Astro.props as Props
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+---
+
+<!DOCTYPE html>
+<html lang={LANG} dir='ltr' data-wf-site='👻'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <!-- https://github.com/wappalyzer/wappalyzer/tree/master/src/technologies -->
+    <meta name='generator' content='XOOPS DotNetNuke mkws Plone KirbyCMS PHP-Nuke Pagekit ZenCart DedeCMS ImpressCMS' />
+    <meta name='store-config' content='graphqlMethod' />
+    <meta name='format-detection' content='telephone=no, email=no' />
+    <meta name='robots' content='max-snippet:-1, max-image-preview: large, max-video-preview: -1' />
+    <meta name='theme-color' content={colorLight} media='(prefers-color-scheme: light)' />
+    <meta name='color-scheme' content='light' />
+    <meta name='apple-mobile-web-app-title' content={DOMAIN} />
+    <meta name='application-name' content={DOMAIN} />
+    <Fonts />
+    <link rel='canonical' href={canonicalURL} />
+    <link rel='stylesheet' href='/assets/print.css' media='print' onload="this.media='all'" />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' sizes='any' />
+    <link rel='alternate' title={`${DOMAIN} RSS Feed`} href='/rss.xml' type='application/rss+xml' />
+    <link rel='alternate' type='application/json' title={`${DOMAIN} JSON Feed`} href='/atom.json' />
+    <link rel='sitemap' title={`${DOMAIN} Sitemap`} href='/sitemap.xml' type='application/xml' />
+    <title>{title}</title>
+    <meta name='description' content={description} />
+    <!-- https://github.com/lumirth/lumirth.github.io/blob/14e81a2b6b0d9641f5ee3c72df2754dbff9203df/public/app.js -->
+    <script is:inline src='/assets/app.js'></script>
+    <slot name='head-extra' />
+  </head>
+  <body class='h-feed' itemscope itemtype='https://schema.org/WebPage'>
+    <slot />
+  </body>
+</html>

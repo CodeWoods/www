@@ -1,0 +1,13 @@
+/* FIXME: 太窄 */
+.site-nav > ul {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* FIXME: 無效 */
+.right {
+  float: right;
+}

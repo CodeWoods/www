@@ -1,0 +1,29 @@
+.info-outdated {
+  display: flex;
+  align-items: center;
+  max-width: 26rem;
+  margin-right: auto;
+  margin-left: auto;
+  margin-left: 0.75rem;
+  margin-left: 0.875rem;
+  padding: 0.75rem 1rem;
+  background-color: lightgoldenrodyellow; /* lightcyan / aliceblue */
+  border-width: 1px;
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 2px 0 rgb(0 0 0 / 5%);
+
+  ::selection {
+    background-color: azure;
+  }
+}
+
+.info-outdated__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.75rem;
+  color: red;
+}
+
+.info-outdated__text {
+  line-height: 1.125rem;
+}

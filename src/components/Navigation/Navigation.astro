@@ -1,0 +1,70 @@
+---
+// @credit: https://github.com/reona5/dev/blob/78bf2963bbdebfbf0e30b897a293867734e7f62d/src/components/Header.astro
+const navItems = [
+  { name: 'HOME', href: '/' },
+  { name: 'RSS', href: '/rss.xml' }
+]
+
+export type navItem = (typeof navItems)[number]['name']
+export type Props = { currentPage?: navItem }
+const { currentPage } = Astro.props
+const isCurrentItem = (item) => item === currentPage
+const ariaCurrent: { 'aria-current': 'page' | undefined } = {
+  'aria-current': 'page'
+}
+---
+
+<a class='screen-reader screen-reader-focusable' data-pagefind-ignore href='#main'
+  >Skip to main <span role='presentation'>content</span></a
+>
+<nav class='site-nav' role='navigation' itemtype='https://schema.org/SiteNavigationElement' itemscope>
+  <ul>
+    {
+      navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class={isCurrentItem(item.name) ? 'underline' : undefined}
+            {...(isCurrentItem(item.name) && ariaCurrent)}
+          >
+            {item.name}
+          </a>
+        </li>
+      ))
+    }
+    <div class='right'>
+      <input id='search' type='text' placeholder='Search...' />
+    </div>
+  </ul>
+</nav>
+<!-- pagefind -->
+<div id='results'></div>
+<script is:inline>
+  // 搜尋功能只在 `astro build` 可用
+  // @credit: https://github.com/TheOtterlord/astro-search
+  document.querySelector('#search')?.addEventListener('input', async (e) => {
+    // only load the pagefind script once
+    if (e.target.dataset.loaded !== 'true') {
+      e.target.dataset.loaded = 'true'
+      // load the pagefind script
+      // eslint-disable-next-line import/no-unresolved, import/no-absolute-path
+      window.pagefind = await import('/pagefind/pagefind.js')
+    }
+
+    // search the index using the input value
+    const search = await window.pagefind.search(e.target.value)
+
+    // clear the old results
+    document.querySelector('#results').innerHTML = ''
+
+    // add the new results
+    for (const result of search.results) {
+      const data = await result.data()
+      document.querySelector('#results').innerHTML += `
+        <a href="${data.url}">
+          <h3>${data.meta.title}</h3>
+          <p>${data.excerpt}</p>
+        </a>`
+    }
+  })
+</script>

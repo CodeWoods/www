@@ -1,0 +1,14 @@
+---
+import Document, { Props as DocProps } from './_document.astro'
+
+interface Props extends Exclude<DocProps, 'title'> {
+  title?: string
+}
+const { ...attrs } = Astro.props as Props
+---
+
+<Document {...attrs}>
+  <main id='main' itemprop='mainEntityOfPage' itemscope itemtype='https://schema.org/Blog'>
+    <slot />
+  </main>
+</Document>

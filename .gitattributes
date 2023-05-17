@@ -1,8 +1,41 @@
-*               text eol=lf
-content/*       linguist-documentation=true
-public/*        linguist-vendored=true
-.editorconfig   export-ignore
-.vscode         export-ignore
-.github         export-ignore
-.gitattributes  export-ignore
-.gitignore      export-ignore
+*                 text eol=lf
+
+# Source code
+*.css             text diff=css
+*.htm             text diff=html
+*.html            text diff=html
+*.js              text
+*.map             text -diff
+.husky/*          text eol=lf
+
+# Docker
+Dockerfile        text
+
+# Configs
+.editorconfig     text
+.env              ini
+.github           export-ignore
+.gitattributes    text
+.gitconfig        text
+.vscode           export-ignore
+*.lock            text -diff
+package.json      text eol=lf
+pnpm-lock.yaml    text eol=lf -diff
+*.yaml            text
+browserslist      text
+Makefile          text
+makefile          text
+
+# Documentation
+*.md              text diff=markdown
+content/*         linguist-documentation=true
+public/*          linguist-vendored=true
+
+# Graphics
+*.svg             text
+
+# RC files (like .babelrc or .eslintrc)
+*.*rc             jsonc
+
+# Ignore files (like .gitignore)
+*.*ignore         text

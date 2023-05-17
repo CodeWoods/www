@@ -1,0 +1,29 @@
+:root {
+  /* -- Fonts -- */
+  --font-family-heading: 'Londrina Shadow', 'LXGW WenKai Mono', ui-sans-serif, system-ui, sans-serif;
+  --font-family-main: 'Alegreya Sans', 'LXGW WenKai Mono', ui-sans-serif, system-ui, sans-serif;
+  --font-family-mono: ui-monospace, monospace, 'LXGW WenKai Mono';
+  --font-family-caption: 'Alegreya Sans', 'LXGW WenKai Mono', sans-serif-condensed, ui-sans-serif, system-ui, sans-serif;
+
+  /* -- Colors -- */
+  --color-page-background: #fff4f3;
+  --color-text: #1c1d1f;
+  --color-codeBackgroundInline: #cbf8ec;
+  --color-border: #777;
+  --color-codeBlockBackground: #1e1e1e;
+
+  /* -- Layouts -- */
+  --content-width: 66ch;
+  --radius-md: 8px;
+
+  /* -- Spacing -- */
+  --spacing-none: 0;
+  --spacing-xxs: 0.25rem;
+  --spacing-xs: 0.5rem;
+  --spacing-s: 0.75rem;
+  --spacing-m: 1rem;
+  --spacing-l: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 4rem;
+  --spacing-xxxl: 6rem;
+}

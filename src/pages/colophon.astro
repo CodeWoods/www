@@ -1,0 +1,9 @@
+---
+// ? 設為第二層子頁面版型會跑掉( about/colophon )
+import PostLayout from '~/layouts/PostLayout.astro'
+import * as Colophon from '~/data/colophon.md'
+export const prerender = true
+const { title } = Colophon.frontmatter
+---
+
+<PostLayout title={title} set:html={Colophon.compiledContent()} />

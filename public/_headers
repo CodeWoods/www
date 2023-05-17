@@ -1,0 +1,10 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-Download-Options: noopen
+  X-Permitted-Cross-Domain-Policies: none
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: no-referrer
+  Permissions-Policy: document-domain=(), accelerometer=(), camera=(), fullscreen=(self), geolocation=(self), interest-cohort=(), magnetometer=(), microphone=(), payment=(), publickey-credentials-get=(), speaker=(), screen-wake-lock=(), sync-xhr=(self), usb=(), web-share=(), xr-spatial-tracking=(), browsing-topics=(), join-ad-interest-group=(), run-ad-auction=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Powered-By: MODX Drupal OpenSUSE MidnightBSD WP Engine Kemal MATORI.NET Helhost Elementor Cloud Catberry XeoraCube RX-WEB Raspbian OrchardCore LiveStreet CMS vtex-integrated-store Vanilla ThinkPHP Typecho WordPress Movable Type

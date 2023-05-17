@@ -1,6 +1,6 @@
 # WARNING: 尚未測試
 # build stage
-ARG NODE_VERSION=18
+ARG NODE_VERSION=20
 FROM --platform=linux/amd64 node:${NODE_VERSION}-slim AS build-env
 COPY . /app
 WORKDIR /app
@@ -15,5 +15,9 @@ COPY --from=build-env --chown=nonroot:nonroot /app/dist /app/dist
 COPY --from=build-env --chown=nonroot:nonroot /app/node_modules /app/node_modules
 WORKDIR /app
 
+
 EXPOSE 9000
+ENV HOST=0.0.0.0
+ENV PORT=9000
+ENV NODE_ENV=production
 CMD ["npm", "run", "preview"]

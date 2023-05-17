@@ -1,0 +1,73 @@
+/*FIXME: 頂部在手機瀏覽太空 */
+
+.post-header {
+  margin-block: 3rem;
+}
+
+.post-header__title {
+  position: relative;
+  font-family: var(--font-family-heading);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.post-header__metadata {
+  color: #54575d;
+}
+
+.post-header__timestamp {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.post-header__alt {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.post-header__sep {
+  margin-right: 0.14rem;
+  margin-left: 0.14rem;
+}
+
+/* https://codepen.io/alvarotrigo/pen/dyJbjMX */
+.circle-sketch-highlight {
+  position: relative;
+}
+
+.circle-sketch-highlight::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0.25em;
+  left: -0.5em;
+  transform: rotate(2deg);
+  width: 100%;
+  height: 1em;
+  padding: 0.1em 0.25em;
+  opacity: 0.7;
+  border-color: red;
+  border-style: solid;
+  border-width: 2px;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+.circle-sketch-highlight::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0.35em;
+  left: -0.5em;
+  transform: rotate(-1deg);
+  width: 100%;
+  height: 1em;
+  padding: 0.1em 0.25em;
+  opacity: 0.7;
+  border-color: red;
+  border-style: solid;
+  border-width: 2px;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+}

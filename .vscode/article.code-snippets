@@ -1,0 +1,20 @@
+{
+  "Frontmatter": {
+    "scope": "markdown,mdoc,mdx",
+    "prefix": ["--", "---"],
+    "body": [
+      "---",
+      "isDraft: true",
+      "title: $1",
+      "pubDateTime: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "---",
+      "",
+      "$0"
+    ]
+  },
+  "Zettel Reference": {
+    "scope": "markdown,mdoc,mdx",
+    "prefix": "[[",
+    "body": "<!-- [[$1]] -->$0"
+  }
+}

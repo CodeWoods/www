@@ -1,0 +1,63 @@
+---
+// @credit:
+// https://github.com/johneatmon/eatmon.co/blob/main/src/pages/blog/%5B...slug%5D.astro
+// https://github.com/awmottaz/tonymottaz.com
+// https://github.com/yamanoku/archives/blob/main/src/pages/%5Bslug%5D.astro
+import { loadDefaultTraditionalChineseParser } from 'budoux'
+import MainLayout from '~/layouts/MainLayout.astro'
+import Footer from '~/components/Footer/Footer.astro'
+import Prose from '~/components/blog/Prose.astro'
+import OutdateTip from '~/components/blog/OutdateTip.astro'
+import '~/styles/components/post-outdate-tip.css'
+import { machineDate, readableDate } from '~/utils/getFormattedDate'
+import { SITE_TITLE } from '../config'
+
+const parser = loadDefaultTraditionalChineseParser()
+const { title, pubDateTime, updatedDate } = Astro.props
+const isOld =
+  pubDateTime < new Date(Date.now() - 31536000000) &&
+  (updatedDate === undefined || updatedDate < new Date(Date.now() - 31536000000))
+---
+
+<MainLayout title={`${title} | ${SITE_TITLE}`}>
+  <div class='post-page-layout'>
+    <article class='h-entry' itemscope itemtype='https://schema.org/BlogPosting' itemprop='blogPost'>
+      <header class='post-header'>
+        <h1 id='overview' class='post-header__title circle-sketch-highlight p-name' itemprop='name headline'>
+          <Fragment set:html={parser.translateHTMLString(title)} />
+        </h1>
+        <div class='post-header__metadata'>
+          {
+            pubDateTime && (
+              <Fragment>
+                <time
+                  class='post-header__timestamp'
+                  datetime={machineDate(pubDateTime)}
+                  itemprop='datePublished'
+                  set:text={readableDate(pubDateTime)}
+                />
+              </Fragment>
+            )
+          }
+          {
+            updatedDate && (
+              <Fragment>
+                <span class='post-header__sep'>—</span>
+                <span class='post-header__alt'>Updated</span>
+                <time
+                  class='post-header__timestamp'
+                  datetime={machineDate(updatedDate)}
+                  itemprop='dateUpdated'
+                  set:text={readableDate(updatedDate)}
+                />
+              </Fragment>
+            )
+          }
+        </div>
+      </header>
+      {isOld ? <OutdateTip /> : null}
+      <Prose class='markdown' set:html={Astro.slots.render('default')} />
+    </article>
+  </div>
+  <Footer />
+</MainLayout>

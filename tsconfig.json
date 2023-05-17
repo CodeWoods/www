@@ -1,11 +1,15 @@
 {
   "extends": "astro/tsconfigs/base",
-  "display": "theme/sleek",
   "compilerOptions": {
-    "types": ["astro/client"],
     "baseUrl": ".",
+    // "paths": { "#/*": ["./src/*"] },
+    "paths": { "~/*": ["./src/*"] },
     "strictNullChecks": true,
     "allowJs": true,
-    "paths": { "#/*": ["./src/*"] }
-  }
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "types": ["@astrojs/client"]
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/*", ".eslintrc.cjs"]
 }

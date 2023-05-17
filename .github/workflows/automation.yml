@@ -1,0 +1,57 @@
+name: Run Build and Test Automation
+
+on:
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch’s name
+  push:
+    branches: ['main']
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    # Only run if this is not a pull request, or for pull requests on forks
+    if: github.event_name != 'pull_request' ||
+      github.event.pull_request.head.repo.full_name != 'CodeWoods/www'
+    steps:
+      - name: 📥 Checkout source
+        uses: actions/checkout@v3 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.tool-versions'
+          cache: 'npm'
+
+      - name: 📥 Install dependencies
+        run: |
+          npm ci --audit=false --fund=false
+
+      - name: 🔨 Build website # This runs a series of commands as if building a live version of the project
+        run: |
+          npm run build
+
+      - name: 📤 Upload website distribution bundle
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: |
+            dist/
+          retention-days: 1
+# @links:
+# https://github.com/korosuke613/homepage-2nd/blob/main/.github/workflows/ci.yaml
+# https://github.com/AlexTMjugador/Home/blob/master/.github/workflows/ci.yml

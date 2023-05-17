@@ -2,7 +2,17 @@
 dist/
 # generated types
 .astro/
+.cache/
+.jampack/
+.lighthouseci/
 coverage/
+__snapshots__/
+.snap
+playwright-report/
+test-results/
+fontsubset.txt
+lint_js.txt
+lint_css.txt
 
 # dependencies
 node_modules/
@@ -23,6 +33,16 @@ firebase-debug.log*
 # macOS-specific files
 .DS_Store
 
-# Firebase
+# Hosting
 .firebase
 .firebaserc
+.vercel
+
+# Images
+public/images
+
+# Fonts
+*.ttf
+*.otf
+src/styles/fonts
+public/fonts

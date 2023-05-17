@@ -1,0 +1,46 @@
+/*
+If you want something to be visually hidden, but still accessible to screen readers, then you need
+to apply a smattering of styles for this to work correctly. The MDN points out that `display: none`
+will remove the element from the accessibility tree, and links to this article with a better
+strategy: https://gomakethings.com/hidden-content-for-better-a11y/#hiding-the-link
+
+The snippet below is copied from that article.
+*/
+
+/**
+ * Visually hide an element, but leave it available for screen readers
+ * @link https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/main.css
+ * @link http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ * @example
+ * <label class="screen-reader" for="search">Search criteria</label>
+ * <input type="text" id="search" name="search" value="">
+ */
+.screen-reader {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+/**
+   * Extends the .screen-reader class to allow the element to be focusable when navigated to via the keyboard
+   * @link https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/main.css
+   * @link https://www.drupal.org/node/897638
+   * @example
+   * <a class="screen-reader screen-reader-focusable" href="#main">Skip to the main content</a>
+   */
+.screen-reader-focusable:active,
+.screen-reader-focusable:focus {
+  position: static;
+  overflow: visible;
+  width: auto;
+  height: auto;
+  margin: 0;
+  white-space: normal;
+  clip: auto;
+}

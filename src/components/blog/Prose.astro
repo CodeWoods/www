@@ -1,0 +1,20 @@
+---
+import '~/styles/prism.css'
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<any> {
+  as?: keyof HTMLElementTagNameMap
+}
+const { as: Prose = 'div', class: className = '', ...attrs } = Astro.props as Props
+---
+
+<Prose class:list={[className, 'heti']} itemprop='articleBody' {...attrs}>
+  <slot />
+</Prose>
+<script>
+  /* or zooming? https://github.com/kingdido999/zooming */
+  import mediumZoom from 'medium-zoom'
+
+  const zoom = mediumZoom()
+  zoom.attach(':not(a) > img:not(.no-zoom)')
+</script>

@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    },
+    {
+      "name": "src",
+      "path": "./src"
+    },
+    {
+      "name": "posts",
+      "path": "./src/content/pages"
+    },
+    {
+      "name": "styles",
+      "path": "./src/styles"
+    }
+  ]
+}
